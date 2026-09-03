@@ -43,7 +43,7 @@
         .flower-bottom-left { bottom: -10px; left: -10px; transform: rotate(-10deg); }
         .flower-bottom-right { bottom: -10px; right: -10px; transform: rotate(10deg) scaleX(-1); }
 
-        /* Icon chibi dễ thương xung quanh */
+        /* Icon dễ thương trôi nổi */
         .cute-icon {
             position: absolute;
             font-size: 2.2rem;
@@ -67,9 +67,9 @@
             padding: 20px;
         }
 
-        /* Hộp thông điệp màu xám trong suốt giống hình mẫu */
+        /* Hộp thông điệp giống hệt hình mẫu */
         .card-message {
-            background: rgba(60, 60, 60, 0.72);
+            background: rgba(60, 60, 60, 0.75);
             color: #ffffff;
             font-size: 2.5rem;
             font-weight: 700;
@@ -90,18 +90,18 @@
             filter: drop-shadow(0 0 6px rgba(255, 51, 102, 0.8));
         }
 
-        /* Nút phát nhạc tinh tế */
+        /* Nút phát nhạc */
         .play-btn {
             margin-top: 25px;
-            background: rgba(255, 255, 255, 0.85);
+            background: rgba(255, 255, 255, 0.9);
             color: #d81b60;
             border: none;
             padding: 12px 28px;
             border-radius: 30px;
-            font-size: 1rem;
+            font-size: 1.05rem;
             font-weight: 600;
             cursor: pointer;
-            box-shadow: 0 4px 15px rgba(216, 27, 96, 0.2);
+            box-shadow: 0 4px 15px rgba(216, 27, 96, 0.25);
             transition: all 0.3s ease;
         }
 
@@ -118,11 +118,6 @@
             user-select: none;
             pointer-events: none;
             animation: fall linear forwards;
-        }
-
-        /* Khung YouTube chạy ẩn hoàn toàn */
-        .hidden-player {
-            display: none;
         }
 
         @keyframes float {
@@ -153,6 +148,7 @@
 </head>
 <body>
 
+    <!-- Trang trí 4 góc và icon -->
     <div class="decor-bg">
         <img class="decor-flower flower-top-left" src="https://images.fineartamerica.com/images/artworkimages/mediumlarge/3/stargazer-lily-cut-out-png-transparent-background-flower-png-flora.png" alt="hoa ly">
         <img class="decor-flower flower-top-right" src="https://images.fineartamerica.com/images/artworkimages/mediumlarge/3/stargazer-lily-cut-out-png-transparent-background-flower-png-flora.png" alt="hoa ly">
@@ -165,41 +161,47 @@
         <span class="cute-icon icon-4">✨</span>
     </div>
 
+    <!-- Khung chữ trung tâm -->
     <div class="container">
         <div class="card-message">
             <span>Yêu bé lắm Trân ạ</span>
             <span class="heart">❤️</span>
         </div>
-        <button class="play-btn" onclick="togglePlay()">🎵 Bật / Tắt Nhạc</button>
+        <button class="play-btn" id="musicBtn" onclick="togglePlay()">🎵 Phát Nhạc Nền</button>
     </div>
 
-    <iframe 
-        id="youtube-player"
-        class="hidden-player"
-        src="https://www.youtube.com/embed/f-VsoLm4i5c?enablejsapi=1&autoplay=1&loop=1&playlist=f-VsoLm4i5c" 
-        allow="autoplay">
-    </iframe>
+    <!-- Nhạc nền ẩn từ tệp âm thanh chính xác của bài hát -->
+    <audio id="bgMusic" loop preload="auto">
+        <source src="https://files.catbox.moe/k2n324.mp3" type="audio/mpeg">
+    </audio>
 
     <script>
-        // Xử lý bật/tắt nhạc
-        let isPlaying = true;
+        const audio = document.getElementById('bgMusic');
+        const btn = document.getElementById('musicBtn');
+        let isPlaying = false;
+
         function togglePlay() {
-            const iframe = document.getElementById('youtube-player');
             if (isPlaying) {
-                iframe.contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*');
+                audio.pause();
+                btn.innerHTML = '🎵 Bật Nhạc Nền';
             } else {
-                iframe.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
+                audio.play();
+                btn.innerHTML = '⏸ Tắt Nhạc Nền';
             }
             isPlaying = !isPlaying;
         }
 
-        // Tự động bật nhạc khi chạm vào màn hình lần đầu
+        // Tự động phát nhạc khi chạm vào màn hình
         document.addEventListener('click', function() {
-            const iframe = document.getElementById('youtube-player');
-            iframe.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
+            if (!isPlaying) {
+                audio.play().then(() => {
+                    isPlaying = true;
+                    btn.innerHTML = '⏸ Tắt Nhạc Nền';
+                }).catch(e => console.log(e));
+            }
         }, { once: true });
 
-        // Tạo hiệu ứng tim & hoa rơi tự động
+        // Tạo hiệu ứng tim & hoa rơi
         function createFallingItem() {
             const items = ['🌸', '💖', '✨', '🌺', '💕'];
             const item = document.createElement('div');
