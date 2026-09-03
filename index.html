@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gửi Trân ❤️</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body, html {
+            height: 100%;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            overflow: hidden;
+            background: linear-gradient(135deg, #ffebee 0%, #fce4ec 50%, #f3e5f5 100%);
+        }
+
+        /* Nền chứa họa tiết trang trí */
+        .decor-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        /* Hoa ly trang trí 4 góc */
+        .decor-flower {
+            position: absolute;
+            width: 200px;
+            height: auto;
+            opacity: 0.95;
+            filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.1));
+        }
+
+        .flower-top-left { top: -10px; left: -10px; transform: rotate(10deg); }
+        .flower-top-right { top: -10px; right: -10px; transform: rotate(-10deg) scaleX(-1); }
+        .flower-bottom-left { bottom: -10px; left: -10px; transform: rotate(-10deg); }
+        .flower-bottom-right { bottom: -10px; right: -10px; transform: rotate(10deg) scaleX(-1); }
+
+        /* Icon chibi dễ thương xung quanh */
+        .cute-icon {
+            position: absolute;
+            font-size: 2.2rem;
+            animation: float 4s ease-in-out infinite;
+        }
+
+        .icon-1 { top: 15%; left: 25%; animation-delay: 0s; }
+        .icon-2 { top: 18%; right: 28%; animation-delay: 1s; }
+        .icon-3 { bottom: 20%; left: 22%; animation-delay: 2s; }
+        .icon-4 { bottom: 22%; right: 25%; animation-delay: 1.5s; }
+
+        /* Khung nội dung chính ở giữa */
+        .container {
+            position: relative;
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            padding: 20px;
+        }
+
+        /* Hộp thông điệp màu xám trong suốt giống hình mẫu */
+        .card-message {
+            background: rgba(60, 60, 60, 0.72);
+            color: #ffffff;
+            font-size: 2.5rem;
+            font-weight: 700;
+            padding: 22px 42px;
+            border-radius: 20px;
+            backdrop-filter: blur(8px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            animation: pulse 2.5s ease-in-out infinite;
+        }
+
+        .heart {
+            color: #ff3366;
+            font-size: 2.8rem;
+            filter: drop-shadow(0 0 6px rgba(255, 51, 102, 0.8));
+        }
+
+        /* Nút phát nhạc tinh tế */
+        .play-btn {
+            margin-top: 25px;
+            background: rgba(255, 255, 255, 0.85);
+            color: #d81b60;
+            border: none;
+            padding: 12px 28px;
+            border-radius: 30px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(216, 27, 96, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .play-btn:hover {
+            transform: scale(1.06);
+            background: #ffffff;
+        }
+
+        /* Hiệu ứng hoa & tim rơi */
+        .falling-item {
+            position: fixed;
+            top: -10%;
+            z-index: 2;
+            user-select: none;
+            pointer-events: none;
+            animation: fall linear forwards;
+        }
+
+        /* Khung YouTube chạy ẩn hoàn toàn */
+        .hidden-player {
+            display: none;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(110vh) rotate(360deg);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .card-message {
+                font-size: 1.5rem;
+                padding: 16px 26px;
+            }
+            .heart { font-size: 1.8rem; }
+            .decor-flower { width: 120px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="decor-bg">
+        <img class="decor-flower flower-top-left" src="https://images.fineartamerica.com/images/artworkimages/mediumlarge/3/stargazer-lily-cut-out-png-transparent-background-flower-png-flora.png" alt="hoa ly">
+        <img class="decor-flower flower-top-right" src="https://images.fineartamerica.com/images/artworkimages/mediumlarge/3/stargazer-lily-cut-out-png-transparent-background-flower-png-flora.png" alt="hoa ly">
+        <img class="decor-flower flower-bottom-left" src="https://images.fineartamerica.com/images/artworkimages/mediumlarge/3/stargazer-lily-cut-out-png-transparent-background-flower-png-flora.png" alt="hoa ly">
+        <img class="decor-flower flower-bottom-right" src="https://images.fineartamerica.com/images/artworkimages/mediumlarge/3/stargazer-lily-cut-out-png-transparent-background-flower-png-flora.png" alt="hoa ly">
+
+        <span class="cute-icon icon-1">☁️</span>
+        <span class="cute-icon icon-2">🐰</span>
+        <span class="cute-icon icon-3">🐱</span>
+        <span class="cute-icon icon-4">✨</span>
+    </div>
+
+    <div class="container">
+        <div class="card-message">
+            <span>Yêu bé lắm Trân ạ</span>
+            <span class="heart">❤️</span>
+        </div>
+        <button class="play-btn" onclick="togglePlay()">🎵 Bật / Tắt Nhạc</button>
+    </div>
+
+    <iframe 
+        id="youtube-player"
+        class="hidden-player"
+        src="https://www.youtube.com/embed/f-VsoLm4i5c?enablejsapi=1&autoplay=1&loop=1&playlist=f-VsoLm4i5c" 
+        allow="autoplay">
+    </iframe>
+
+    <script>
+        // Xử lý bật/tắt nhạc
+        let isPlaying = true;
+        function togglePlay() {
+            const iframe = document.getElementById('youtube-player');
+            if (isPlaying) {
+                iframe.contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*');
+            } else {
+                iframe.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
+            }
+            isPlaying = !isPlaying;
+        }
+
+        // Tự động bật nhạc khi chạm vào màn hình lần đầu
+        document.addEventListener('click', function() {
+            const iframe = document.getElementById('youtube-player');
+            iframe.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
+        }, { once: true });
+
+        // Tạo hiệu ứng tim & hoa rơi tự động
+        function createFallingItem() {
+            const items = ['🌸', '💖', '✨', '🌺', '💕'];
+            const item = document.createElement('div');
+            item.classList.add('falling-item');
+            item.innerText = items[Math.floor(Math.random() * items.length)];
+            item.style.left = Math.random() * 100 + 'vw';
+            item.style.animationDuration = Math.random() * 3 + 4 + 's';
+            item.style.fontSize = Math.random() * 15 + 18 + 'px';
+            item.style.opacity = Math.random() * 0.7 + 0.3;
+            
+            document.body.appendChild(item);
+
+            setTimeout(() => {
+                item.remove();
+            }, 7000);
+        }
+
+        setInterval(createFallingItem, 400);
+    </script>
+
+</body>
+</html>
